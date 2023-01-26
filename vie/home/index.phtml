@@ -1,0 +1,56 @@
+<div id="view">
+    <div class="fixed-top bg-light border-bottom sticky-top">
+        <div class="d-flex bd-highlight">
+            <div class="text-left px-2">
+                <i class="bi bi-book-half" style='font-size:40px'></i>
+            </div>
+            <div class="flex-fill pt-1">
+                <strong style="font-size: 24px;">LA CEIBA</strong>
+                <div style="font-size: 11px;">&nbsp;Librería & Papelería</div>
+            </div>
+            <div class="flex-fill pt-3 pe-2 text-end">
+                <span class="badge text-bg-primary">
+                    <?php echo $_SESSION["username"]; ?>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div align="center" class="mt-2">
+        <button type="button" class="btn btn-outline-primary m-1 p-0" style="width: 75px;" id="users">
+            <i class="bi bi-people-fill" style='font-size:40px;'></i>
+            <div style="font-size:10px;">Usuarios</div>
+        </button>
+    </div>
+</div>
+<br><br>
+<div class="fixed-bottom bg-light border-top">
+    <div class="d-flex bd-highlight">
+        <div class="flex-fill bd-highlight text-center">
+            <button class="btn btn-link" id="home">
+                <i class="bi bi-house-fill" style='font-size:27px'></i>
+            </button>
+        </div>
+        <div class="flex-fill bd-highlight text-center">
+            <button class="btn btn-link" id="logout">
+                <i class="bi bi-box-arrow-right" style='font-size:27px'></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $.getScript("lib/vcl/nav.js", function () {
+            $("#home").click(function () {
+                show("home", "index", "body", "");
+            });
+            $("#logout").click(function () {
+                show("home", "logout", "body", "");
+            });
+            $("#users").click(function () {
+                show("user", "index", "#view", "");
+            });
+        });
+    });
+</script>

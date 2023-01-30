@@ -42,16 +42,16 @@ $nuevo = $user->id == '';
     </div>
 
     <div class="text-end mt-3">
+      <button class="btn btn-primary" type="submit">
+        <i class="bi bi-save"></i>
+        Guardar
+      </button>
       <?php if (!$nuevo) { ?>
         <button class="btn btn-danger" id="delete">
           <i class="bi bi-trash"></i>
           Eliminar
         </button>
       <?php } ?>
-      <button class="btn btn-primary" type="submit">
-        <i class="bi bi-save"></i>
-        Guardar
-      </button>
     </div>
   </form>
 </div>

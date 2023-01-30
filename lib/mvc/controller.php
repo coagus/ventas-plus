@@ -274,7 +274,9 @@ class Controller
 
     public function search()
     {
-        $action = ($this->action == 'edit' || $this->action == 'delete') ? $this->action : 'index';
+        $action = ($this->action == 'edit'
+            || $this->action == 'delete'
+            || $this->action == 'save') ? 'index' : $this->action;
 
         echo '<div class="container mt-2" id="filter">';
 

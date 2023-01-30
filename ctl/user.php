@@ -29,9 +29,7 @@ class UserController extends Controller
     public function getUser()
     {
         $user = new User();
-        if (isset($_REQUEST['id']))
-            $user = $user->getById($_REQUEST['id']);
-        return $user;
+        return isset($_REQUEST['id']) ? $user->getById($_REQUEST['id']) : $user;
     }
 
     public function edit()

@@ -1,7 +1,7 @@
 <form class="was-validated" id="form-filter" action="javascript:void(0);" enctype="multipart/form-data">
     <div class="input-group">
         <input type="text" name="datafilter" class="form-control" placeholder="Buscar..."
-            value="<?php echo $this->getFilter(); ?>" required>
+            value="<?php echo $this->getFilter(); ?>" required autofocus>
         <button class="btn btn-primary" type="submit">
             <i class="bi bi-search"></i>
         </button>
@@ -15,10 +15,10 @@
     $(document).ready(function () {
         $.getScript("lib/vcl/nav.js", function () {
             $("#clear").click(function () {
-                show("<?php echo $this->controller; ?>", "index", "#view", "");
+                show("<?php echo $this->controller; ?>", "<?php echo $this->getPreAction(); ?>", "#view", "");
             });
             $("#form-filter").submit(function (event) {
-                show("<?php echo $this->controller; ?>", "index", "#view", $(this).serialize());
+                show("<?php echo $this->controller; ?>", "<?php echo $this->getPreAction(); ?>", "#view", $(this).serialize());
             });
         });
     });

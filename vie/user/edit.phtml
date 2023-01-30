@@ -60,7 +60,7 @@ $nuevo = $user->id == '';
   $(document).ready(function () {
     $.getScript("lib/vcl/nav.js", function () {
       $("#back").click(function () {
-        show("user", "index", "#view", "");
+        show("user", "index", "#view", "<?php echo $this->getBackFiltered(); ?>");
       });
       $("#form").submit(function (event) {
         show("user", "save", "#view", $(this).serialize());

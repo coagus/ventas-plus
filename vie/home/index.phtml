@@ -18,8 +18,13 @@
 
     <div align="center" class="mt-2">
         <button type="button" class="btn btn-outline-primary m-1 p-0" style="width: 75px;" id="users">
-            <i class="bi bi-people-fill" style='font-size:40px;'></i>
+            <i class="bi bi-people" style='font-size:40px;'></i>
             <div style="font-size:10px;">Usuarios</div>
+        </button>
+
+        <button type="button" class="btn btn-outline-primary m-1 p-0" style="width: 75px;" id="products">
+            <i class="bi bi-box" style='font-size:40px;'></i>
+            <div style="font-size:10px;">Productos</div>
         </button>
     </div>
 </div>
@@ -50,6 +55,9 @@
             });
             $("#users").click(function () {
                 show("user", "index", "#view", "");
+            });
+            $("#products").click(function () {
+                show("product", "index", "#view", "");
             });
         });
     });

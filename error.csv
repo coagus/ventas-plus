@@ -1,0 +1,1 @@
+"2023-01-29 18:52:55",0129181855,"SQLSTATE[HY000]: General error: 1364 Field 'name' doesn't have a default value","INSERT INTO products () VALUES ()",1

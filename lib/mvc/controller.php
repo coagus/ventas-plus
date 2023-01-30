@@ -229,10 +229,22 @@ class Controller
         return isset($_REQUEST['datafilter']) ? $_REQUEST['datafilter'] : '';
     }
 
+    public function getBackFiltered()
+    {
+        return isset($_SESSION['backfiltered']) ? $_SESSION['backfiltered'] : '';
+    }
+
     public function setPagination($count)
     {
         $this->page = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
         $this->startPage = isset($_REQUEST['startPage']) ? $_REQUEST['startPage'] : 1;
+
+        if ($this->isFiltered()) {
+            $filter = $this->getFilter();
+            $_SESSION['backfiltered'] = "page=$this->page&startPage=$this->startPage&datafilter=$filter";
+        } else {
+            $_SESSION['backfiltered'] = '';
+        }
 
         $this->pages = ceil($count / $this->limit);
 
@@ -255,13 +267,32 @@ class Controller
         $this->view('filter');
     }
 
+    public function getPreAction()
+    {
+        return isset($_REQUEST['preAction']) ? $_REQUEST['preAction'] : 'index';
+    }
+
     public function search()
     {
+        $action = ($this->action == 'edit' || $this->action == 'delete') ? $this->action : 'index';
+
         echo '<div class="container mt-2" id="filter">';
 
         if ($this->isFiltered())
             $this->filter();
 
-        echo '</div>';
+        echo '
+</div>
+
+<script>
+$(document).ready(function () {
+    $.getScript("lib/vcl/nav.js", function () {        
+        $("#search").click(function () {
+            show("' . $this->controller . '", "filter", "#filter", "preAction=' . $action . '");
+        });
+    });
+});
+</script>
+        ';
     }
 }

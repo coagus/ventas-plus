@@ -32,7 +32,9 @@ $users = $this->getAllUsers();
     <tbody>
         <?php foreach ($users as $user) { ?>
             <tr>
-                <td><?php echo $user->username; ?></td>
+                <td>
+                    <?php echo $user->username; ?>
+                </td>
                 <td>
                     <?php echo $user->name; ?>
                 </td>
@@ -56,10 +58,7 @@ $users = $this->getAllUsers();
             });
             $("#add").click(function () {
                 show("user", "edit", "#view", "");
-            });
-            $("#search").click(function () {
-                show("user", "filter", "#filter", "");
-            });
+            });            
 <?php foreach ($users as $user) { ?>
                     $("#edit<?php echo $user->id; ?>").click(function () {
                         show("user", "edit", "#view", "id=<?php echo $user->id; ?>");

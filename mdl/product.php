@@ -1,16 +1,17 @@
 <?php
 require_once __DIR__ . '/../lib/mvc/table.php';
 
-class User extends Table
+class Product extends Table
 {
     public $id = '';
-    public $username = '';
-    public $password = '';
     public $name = '';
+    public $description = '';
+    public $cost = '';
+    public $price = '';
 
     public function __CONSTRUCT()
     {
-        parent::__construct('users');
+        parent::__construct('products');
     }
 
     public function save()
@@ -26,14 +27,14 @@ class User extends Table
     public function getFilter($filter, $start = '0', $limit = '10')
     {
         $qry = "SELECT * 
-                FROM users 
-                WHERE username LIKE '%$filter%' OR name LIKE '%$filter%'";
+                FROM products 
+                WHERE name LIKE '%$filter%' OR description LIKE '%$filter%'";
         return $this->getQuery($qry, $start, $limit);
     }
 
     public function getCountFilter($filter)
     {
-        $qry = "FROM users WHERE username LIKE '%$filter%' OR name LIKE '%$filter%'";
+        $qry = "FROM products WHERE name LIKE '%$filter%' OR description LIKE '%$filter%'";
         return $this->getCountQuery($qry);
     }
 }

@@ -1,0 +1,80 @@
+<?php
+$suppliers = $this->getAllSuppliers();
+?>
+<div class="fixed-top bg-light border-bottom sticky-top">
+    <div class="d-flex bd-highlight">
+        <div class="flex-fill bd-highlight text-left">
+            <button class="btn btn-link" id="back">
+                <i class="bi bi-chevron-left" style='font-size:27px'></i>
+            </button>
+        </div>
+        <div class="flex-fill text-center pt-3">
+            <h4>Proveedores</h4>
+        </div>
+        <button class="btn btn-link" id="search">
+            <i class="bi bi-search" style='font-size:24px'></i>
+        </button>
+        <button class="btn btn-link" id="add">
+            <i class="bi bi-plus-lg" style='font-size:27px'></i>
+        </button>
+    </div>
+</div>
+
+<?php $this->search(); ?>
+
+<div class="accordion mb-2" id="accordionSuppliers">
+    <?php foreach ($suppliers as $supplier) { ?>
+
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="heading<?php echo $supplier->id; ?>">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapse<?php echo $supplier->id; ?>"
+                    aria-controls="collapse<?php echo $supplier->id; ?>">
+                    <?php echo $supplier->name; ?>
+                </button>
+            </h2>
+            <div id="collapse<?php echo $supplier->id; ?>" class="accordion-collapse collapse"
+                aria-labelledby="heading<?php echo $supplier->id; ?>" data-bs-parent="#accordionSuppliers">
+                <div class="accordion-body py-1">
+                    <?php if (trim($supplier->description) != '') { ?>
+                        <div style="font-size: 12px;">Descripción</div>
+                    <?php } ?>
+                    <?php echo $supplier->description; ?>
+                    <div class="row">
+                        <div class="col">
+                            <div style="font-size: 12px;">Teléfono</div>
+                            <?php echo $supplier->phone; ?>
+                        </div>
+                        <div class="col position-relative">
+                            <button class="btn btn-sm btn-primary position-absolute bottom-0 end-0"
+                                id="edit<?php echo $supplier->id; ?>">
+                                <i class="bi bi-pencil-square"></i> Editar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <?php } ?>
+</div>
+
+<?php $this->pagination(); ?>
+
+<script>
+    $(document).ready(function () {
+        $.getScript("lib/vcl/nav.js", function () {
+            $("#back").click(function () {
+                show("home", "index", "body", "");
+            });
+            $("#add").click(function () {
+                show("supplier", "edit", "#view", "");
+            });            
+<?php foreach ($suppliers as $supplier) { ?>
+                    $("#edit<?php echo $supplier->id; ?>").click(function () {
+                        show("supplier", "edit", "#view", "id=<?php echo $supplier->id; ?>");
+                    });    
+<?php } ?>
+        });
+    });
+</script>

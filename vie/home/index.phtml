@@ -26,6 +26,16 @@
             <i class="bi bi-box" style='font-size:40px;'></i>
             <div style="font-size:10px;">Productos</div>
         </button>
+
+        <button type="button" class="btn btn-outline-primary m-1 p-0" style="width: 75px;" id="clients">
+            <i class="bi bi-person-bounding-box" style='font-size:40px;'></i>
+            <div style="font-size:10px;">Clientes</div>
+        </button>
+
+        <button type="button" class="btn btn-outline-primary m-1 p-0" style="width: 75px;" id="suppliers">
+            <i class="bi bi-building-fill-gear" style='font-size:40px;'></i>
+            <div style="font-size:10px;">Proveedores</div>
+        </button>
     </div>
 </div>
 <br><br>
@@ -58,6 +68,12 @@
             });
             $("#products").click(function () {
                 show("product", "index", "#view", "");
+            });
+            $("#clients").click(function () {
+                show("client", "index", "#view", "");
+            });
+            $("#suppliers").click(function () {
+                show("supplier", "index", "#view", "");
             });
         });
     });

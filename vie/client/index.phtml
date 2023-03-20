@@ -66,16 +66,16 @@ $clients = $this->getAllClients();
     $(document).ready(function () {
         $.getScript("lib/vcl/nav.js", function () {
             $("#back").click(function () {
-                show("home", "index", "body", "");
+                show("home", "admin", "#view", "");
             });
             $("#add").click(function () {
                 show("client", "edit", "#view", "");
-            });            
-<?php foreach ($clients as $client) { ?>
-                    $("#edit<?php echo $client->id; ?>").click(function () {
-                        show("client", "edit", "#view", "id=<?php echo $client->id; ?>");
-                    });    
-<?php } ?>
+            });
+            <?php foreach ($clients as $client) { ?>
+                $("#edit<?php echo $client->id; ?>").click(function () {
+                    show("client", "edit", "#view", "id=<?php echo $client->id; ?>");
+                });
+            <?php } ?>
         });
     });
 </script>

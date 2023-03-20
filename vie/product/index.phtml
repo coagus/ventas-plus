@@ -43,11 +43,13 @@ $products = $this->getAllProducts();
                     <div class="row">
                         <div class="col">
                             <div style="font-size: 12px;">Costo</div>
-                            Q.<?php echo number_format($product->cost, 2, '.', ','); ?>
+                            Q.
+                            <?php echo number_format($product->cost, 2, '.', ','); ?>
                         </div>
                         <div class="col">
                             <div style="font-size: 12px;">Precio</div>
-                            Q.<?php echo number_format($product->price, 2, '.', ','); ?>
+                            Q.
+                            <?php echo number_format($product->price, 2, '.', ','); ?>
                         </div>
                         <div class="col position-relative">
                             <button class="btn btn-sm btn-primary position-absolute bottom-0 end-0"
@@ -69,16 +71,16 @@ $products = $this->getAllProducts();
     $(document).ready(function () {
         $.getScript("lib/vcl/nav.js", function () {
             $("#back").click(function () {
-                show("home", "index", "body", "");
+                show("home", "admin", "#view", "");
             });
             $("#add").click(function () {
                 show("product", "edit", "#view", "");
-            });            
-<?php foreach ($products as $product) { ?>
-                    $("#edit<?php echo $product->id; ?>").click(function () {
-                        show("product", "edit", "#view", "id=<?php echo $product->id; ?>");
-                    });    
-<?php } ?>
+            });
+            <?php foreach ($products as $product) { ?>
+                $("#edit<?php echo $product->id; ?>").click(function () {
+                    show("product", "edit", "#view", "id=<?php echo $product->id; ?>");
+                });
+            <?php } ?>
         });
     });
 </script>

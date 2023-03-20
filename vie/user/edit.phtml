@@ -1,5 +1,6 @@
 <?php
 $user = $this->getUser();
+$roles = $this->getRoles();
 $nuevo = $user->id == '';
 ?>
 <div class="fixed-top bg-light border-bottom sticky-top">
@@ -39,6 +40,19 @@ $nuevo = $user->id == '';
     <div class="form-floating mb-2">
       <input type="text" class="form-control" name="name" placeholder="name" value="<?php echo $user->name; ?>">
       <label for="floatingInput">Nombre</label>
+    </div>
+
+    <div class="form-floating">
+      <select class="form-select" name="role_id" id="rol" aria-label="Rol">
+        <?php
+        $currentRole = $user->role_id == '' ? '2' : $user->role_id;
+        foreach ($roles as $r) { ?>
+          <option value="<?php echo $r->id; ?>" <?php echo $r->id == $currentRole ? 'selected' : ''; ?>>
+            <?php echo $r->role; ?>
+          </option>
+        <?php } ?>
+      </select>
+      <label for="rol">Rol</label>
     </div>
 
     <div class="text-end mt-3">

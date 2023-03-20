@@ -16,40 +16,116 @@
         </div>
     </div>
 
-    <div align="center" class="mt-2">
-        <button type="button" class="btn btn-outline-primary m-1 p-0" style="width: 75px;" id="users">
-            <i class="bi bi-people" style='font-size:40px;'></i>
-            <div style="font-size:10px;">Usuarios</div>
+    <div class="text-center mt-1">
+        <button type="button" class="btn btn-lg btn-primary m-1" style="width: 150px;" id="inventory">
+            <i class="bi bi-boxes" style='font-size:19px;'></i>
+            Inventario
         </button>
 
-        <button type="button" class="btn btn-outline-primary m-1 p-0" style="width: 75px;" id="products">
-            <i class="bi bi-box" style='font-size:40px;'></i>
-            <div style="font-size:10px;">Productos</div>
-        </button>
-
-        <button type="button" class="btn btn-outline-primary m-1 p-0" style="width: 75px;" id="clients">
-            <i class="bi bi-person-bounding-box" style='font-size:40px;'></i>
-            <div style="font-size:10px;">Clientes</div>
-        </button>
-
-        <button type="button" class="btn btn-outline-primary m-1 p-0" style="width: 75px;" id="suppliers">
-            <i class="bi bi-building-fill-gear" style='font-size:40px;'></i>
-            <div style="font-size:10px;">Proveedores</div>
+        <button type="button" class="btn btn-lg btn-success m-1" style="width: 150px;" id="add">
+            <i class="bi bi-plus-lg" style='font-size:19px;'></i>
+            Orden
         </button>
     </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="text-center">Pendientes</th>
+                <th class="text-center">Generada</th>
+                <th class="text-center">Despachado</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-outline-secondary" type="button">
+                            #1
+                            <div style="font-size:9px; text-align: left;">
+                                C-Kenneth Agustin <br>
+                                V-coagus
+                            </div>
+                        </button>
+                        <button class="btn btn-outline-secondary" type="button">
+                            #1
+                            <div style="font-size:9px; text-align: left;">
+                                C-Kenneth Agustin <br>
+                                V-coagus
+                            </div>
+                        </button>
+                    </div>
+                </td>
+                <td>
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-outline-primary" type="button">
+                            #1
+                            <div style="font-size:9px; text-align: left;">
+                                C-Kenneth Agustin <br>
+                                V-coagus
+                            </div>
+                        </button>
+                        <button class="btn btn-outline-primary" type="button">
+                            #1
+                            <div style="font-size:9px; text-align: left;">
+                                C-Kenneth Agustin <br>
+                                V-coagus
+                            </div>
+                        </button>
+                    </div>
+                </td>
+                <td>
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-outline-success" type="button">
+                            #1
+                            <div style="font-size:9px; text-align: left;">
+                                C-Kenneth Agustin <br>
+                                V-coagus
+                            </div>
+                        </button>
+                        <button class="btn btn-outline-success" type="button">
+                            #1
+                            <div style="font-size:9px; text-align: left;">
+                                C-Kenneth Agustin <br>
+                                V-coagus
+                            </div>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
 </div>
 <br><br>
 <div class="fixed-bottom bg-light border-top">
     <div class="d-flex bd-highlight">
         <div class="flex-fill bd-highlight text-center">
-            <button class="btn btn-link" id="home">
-                <i class="bi bi-house-fill" style='font-size:27px'></i>
+            <button class="btn btn-link m-0 p-0" id="home">
+                <i class="bi bi-house" style='font-size:27px'></i>
             </button>
+            <div style="font-size: 10px;">Inicio</div>
         </div>
+
         <div class="flex-fill bd-highlight text-center">
-            <button class="btn btn-link" id="logout">
+            <button class="btn btn-link m-0 p-0" id="admin">
+                <i class="bi bi-gear" style='font-size:27px'></i>
+            </button>
+            <div style="font-size: 10px;">Admin</div>
+        </div>
+
+        <div class="flex-fill bd-highlight text-center">
+            <button class="btn btn-link m-0 p-0" id="mantainer">
+                <i class="bi bi-bar-chart-line" style='font-size:27px'></i>
+            </button>
+            <div style="font-size: 10px;">Reportes</div>
+        </div>
+
+        <div class="flex-fill bd-highlight text-center">
+            <button class="btn btn-link m-0 p-0" id="logout">
                 <i class="bi bi-box-arrow-right" style='font-size:27px'></i>
             </button>
+            <div style="font-size: 10px;">Salir</div>
         </div>
     </div>
 </div>
@@ -63,17 +139,8 @@
             $("#logout").click(function () {
                 show("home", "logout", "body", "");
             });
-            $("#users").click(function () {
-                show("user", "index", "#view", "");
-            });
-            $("#products").click(function () {
-                show("product", "index", "#view", "");
-            });
-            $("#clients").click(function () {
-                show("client", "index", "#view", "");
-            });
-            $("#suppliers").click(function () {
-                show("supplier", "index", "#view", "");
+            $("#admin").click(function () {
+                show("home", "admin", "#view", "");
             });
         });
     });

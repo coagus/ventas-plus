@@ -61,6 +61,11 @@ class HomeController extends Controller
         $this->view('login');
     }
 
+    public function admin()
+    {
+        $this->view();
+    }
+
     public function getError()
     {
         return $this->error;

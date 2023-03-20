@@ -16,6 +16,8 @@ class Controller
     private $startPage = 1;
     private $start = 0;
     private $pageList;
+    private $paramsPags = '';
+    private $extraParams = '';
 
     public function __CONSTRUCT($controller, $action)
     {
@@ -37,9 +39,11 @@ class Controller
                 $this->table = new $table();
                 $this->isLocal = true;
             } else {
-                $error = "No existe mantenimiento de " . ucwords($this->controller) . " ($pathObject) ni vista $this->action a presentar";
-                $this->showError($error);
-                return;
+                if ($this->action != "filter") {
+                    $error = "No existe mantenimiento de " . ucwords($this->controller) . " ($pathObject) ni vista $this->action a presentar";
+                    $this->showError($error);
+                    return;
+                }
             }
         }
     }
@@ -164,25 +168,31 @@ class Controller
 
     public function showError($e)
     {
-        echo
-            '<div class="alert alert-warning alert-dismissible fade show" role="alert">
-                <strong>
-                    <i class="fas fa-bug" style="font-size:17px"></i> 
-                    Error Controlado!
-                </strong>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <hr>
-                ' . $e . '
-            </div>';
+        $codigo = date("mdHGs");
+        echo "
+            <div class='alert alert-warning alert-dismissible fade show' role='alert'>
+                <strong>Error!</strong> Código $codigo, comunícalo al Administrador.
+                <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+            </div>
+            ";
+
+        $handle = fopen(__DIR__ . "/../../error.csv", "a");
+        $reg = array(date("Y-m-d H:i:s"), $codigo, $e, '', $_SESSION["id"]);
+        fputcsv($handle, $reg);
+        fclose($handle);
     }
 
     // pagination
-    public function pagination()
+    public function pagination($paramsPags = '')
     {
         $this->isLocal = true;
+        $this->paramsPags = $paramsPags;
         return $this->view('pagination');
+    }
+
+    public function getParamsPags()
+    {
+        return $this->paramsPags;
     }
     public function getPage()
     {
@@ -261,8 +271,18 @@ class Controller
         $this->start = $this->limit * ($this->page - 1);
     }
 
-    public function filter()
+    public function filter($params = '')
     {
+        if ($params == '') {
+            $amp = '';
+            foreach ($_REQUEST as $key => $value) {
+                if ($value != '' && $key != 'controller' && $key != 'action' && $key != 'filter' && $key != 'datafilter') {
+                    $params .= "$amp$key=$value";
+                    $amp = $amp == '' ? '&' : $amp;
+                }
+            }
+        }
+        $this->extraParams = $params;
         $this->isLocal = true;
         $this->view('filter');
     }
@@ -272,7 +292,12 @@ class Controller
         return isset($_REQUEST['preAction']) ? $_REQUEST['preAction'] : 'index';
     }
 
-    public function search()
+    public function getExtraParams()
+    {
+        return $this->extraParams;
+    }
+
+    public function search($params = '')
     {
         $action = ($this->action == 'edit'
             || $this->action == 'delete'
@@ -281,7 +306,7 @@ class Controller
         echo '<div class="container mt-2" id="filter">';
 
         if ($this->isFiltered())
-            $this->filter();
+            $this->filter($params);
 
         echo '
 </div>
@@ -290,7 +315,7 @@ class Controller
 $(document).ready(function () {
     $.getScript("lib/vcl/nav.js", function () {        
         $("#search").click(function () {
-            show("' . $this->controller . '", "filter", "#filter", "preAction=' . $action . '");
+            show("' . $this->controller . '", "filter", "#filter", "preAction=' . $action . "&" . $params . '");
         });
     });
 });

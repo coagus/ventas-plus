@@ -4,6 +4,7 @@ $pages = $this->getPages();
 $startPage = $this->getStartPage();
 $pageList = $this->getPageList();
 $filter = $this->getFilter();
+$params = $this->getParamsPags();
 ?>
 
 <?php if ($pages > 1) { ?>
@@ -39,7 +40,8 @@ $filter = $this->getFilter();
                             $("#prev").click(function () {
                                 show("<?php echo $this->controller; ?>", "<?php echo $this->action; ?>", "#view",
                                     "page=<?php echo $startPage - 1; ?>&startPage=<?php echo $startPage;
-                                         echo $filter == '' ? '' : "&datafilter=$filter";?>");
+                                         echo $filter == '' ? '' : "&datafilter=$filter";
+                                         echo $params == '' ? '' : "&$params";?>");
                             });  
         <?php } ?>
     
@@ -47,7 +49,8 @@ $filter = $this->getFilter();
                             $("#next").click(function () {
                                 show("<?php echo $this->controller; ?>", "<?php echo $this->action; ?>", "#view",
                                     "page=<?php echo $startPage + 5; ?>&startPage=<?php echo $startPage; 
-                                        echo $filter == '' ? '' : "&datafilter=$filter";?>");
+                                        echo $filter == '' ? '' : "&datafilter=$filter";
+                                        echo $params == '' ? '' : "&$params";?>");
                             }); 
         <?php } ?>
 
@@ -57,7 +60,8 @@ $filter = $this->getFilter();
                     $("#p<?php echo $item; ?>").click(function () {
                         show("<?php echo $this->controller; ?>", "<?php echo $this->action; ?>", "#view",
                             "page=<?php echo $item; ?>&startPage=<?php echo $startPage; 
-                                echo $filter == '' ? '' : "&datafilter=$filter";?>");
+                                echo $filter == '' ? '' : "&datafilter=$filter";
+                                echo $params == '' ? '' : "&$params"; ?>");
                     });  
 <?php } ?>
         });

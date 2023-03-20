@@ -1,6 +1,5 @@
-<?php
-$users = $this->getAllUsers();
-?>
+<?php $purchases = $this->getAllPurchases(); ?>
+
 <div class="fixed-top bg-light border-bottom sticky-top">
     <div class="d-flex bd-highlight">
         <div class="flex-fill bd-highlight text-left">
@@ -9,7 +8,7 @@ $users = $this->getAllUsers();
             </button>
         </div>
         <div class="flex-fill text-center pt-3">
-            <h4>Usuarios</h4>
+            <h4><i class="bi bi-cart"></i> Compras</h4>
         </div>
         <button class="btn btn-link" id="search">
             <i class="bi bi-search" style='font-size:24px'></i>
@@ -25,25 +24,30 @@ $users = $this->getAllUsers();
 <table class="table">
     <thead>
         <tr>
-            <th>Usuario</th>
-            <th colspan="2">Nombre</th>
+            <th colspan="2">Proveedor</th>
         </tr>
     </thead>
     <tbody>
-        <?php foreach ($users as $user) { ?>
+        <?php
+        foreach ($purchases as $purchase) {
+            $editing = $purchase->status == 'EDITTNG';
+            $badge = $editing ? 'info' : 'success';
+            $status = $editing ? 'Pendiente' : 'Aplicada';
+            $icon = $editing ? 'pencil-square' : 'eye';
+            ?>
             <tr>
                 <td>
-                    <div style="font-size: 12px;">
-                        <?php echo $user->role; ?>
+                    <?php echo $purchase->supplier; ?>
+                    <div style="font-size:11px;">
+                        <span class="badge text-bg-<?php echo $badge; ?>">
+                            <?php echo $status; ?>
+                        </span>
+                        <?php echo date('d M Y', strtotime($purchase->date)); ?>
                     </div>
-                    <?php echo $user->username; ?>
                 </td>
-                <td class="align-middle">
-                    <?php echo $user->name; ?>
-                </td>
-                <td class="align-middle">
-                    <button class="btn btn-link m-0 p-0" id="edit<?php echo $user->id; ?>">
-                        <i class="bi bi-pencil-square"></i>
+                <td class="text-end align-middle">
+                    <button class="btn btn-link m-0 p-0" id="purchase<?php echo $purchase->id; ?>">
+                        <i class="bi bi-<?php echo $icon; ?>" style='font-size:23px'></i>
                     </button>
                 </td>
             </tr>
@@ -60,11 +64,11 @@ $users = $this->getAllUsers();
                 show("home", "admin", "#view", "");
             });
             $("#add").click(function () {
-                show("user", "edit", "#view", "");
+                show("purchase", "selectSupplier", "#view", "");
             });
-            <?php foreach ($users as $user) { ?>
-                $("#edit<?php echo $user->id; ?>").click(function () {
-                    show("user", "edit", "#view", "id=<?php echo $user->id; ?>");
+            <?php foreach ($purchases as $purchase) { ?>
+                $("#purchase<?php echo $purchase->id; ?>").click(function () {
+                    show("purchase", "editPurchase", "#view", "purchaseId=<?php echo $purchase->id; ?>");
                 });
             <?php } ?>
         });

@@ -9,6 +9,8 @@ class Table
     private $values;
     private $where;
     private $update;
+    private $lastInsertId;
+    private $count;
 
     public function __CONSTRUCT($table)
     {
@@ -73,9 +75,15 @@ class Table
         try {
             $stm = $this->pdo->prepare($qry);
             $stm->execute();
+            $this->lastInsertId = $this->pdo->lastInsertId();
         } catch (Exception $e) {
             $this->showError($e, $qry);
         }
+    }
+
+    public function getLastInsertId()
+    {
+        return $this->lastInsertId;
     }
 
     public function getAll($start = '0', $limit = '10')
@@ -214,11 +222,6 @@ class Table
             return false;
         }
         return true;
-    }
-
-    public function lastInsertId()
-    {
-        return $this->pdo->lastInsertId();
     }
 
     private function validUnique($row)

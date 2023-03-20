@@ -56,7 +56,7 @@ $suppliers = $this->getAllSuppliers();
             });
             <?php foreach ($suppliers as $supplier) { ?>
                 $("#select<?php echo $supplier->id; ?>").click(function () {
-                    show("purchase", "edit", "#view", "supplierId=<?php echo $supplier->id; ?>");
+                    show("purchase", "editPurchase", "#view", "supplierId=<?php echo $supplier->id; ?>");
                 });
             <?php } ?>
         });

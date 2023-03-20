@@ -16,7 +16,7 @@ $isEditing = $purchase->status == 'EDITTNG';
             </h4>
         </div>
         <div class="flex-fill text-end pt-2 pe-2">
-            <a class="btn btn-outline-<?php echo $isEditing ? 'success' : 'primary'; ?>" href="#"
+            <a class="btn btn-sm btn-outline-<?php echo $isEditing ? 'success' : 'primary'; ?>" href="#"
                 id="<?php echo $isEditing ? 'finish' : 'edit'; ?>">
                 <i class="bi bi-<?php echo $isEditing ? 'check-circle' : 'pencil-square'; ?>"></i>
                 <?php echo $isEditing ? 'Finalizar' : 'Editar'; ?>
@@ -43,7 +43,7 @@ if ($isEditing) {
     $params = "preAction=editPurchase&purchaseId=$purchase->id&tab=$tab";
     ?>
 
-    <ul class="nav nav-tabs mx-1">
+    <ul class="nav nav-tabs mx-1" style="font-size: 14px;">
         <li class="nav-item">
             <a class="nav-link <?php echo $tab == '1' ? 'active' : ''; ?>" ref="#" id="tabAdd">
                 <i class="bi bi-plus"></i> Agregar
@@ -76,7 +76,7 @@ if ($isEditing) {
         foreach ($products as $product) {
             if ($tab == '1') { ?>
                 <div class="d-flex">
-                    <div class="flex-grow-1 p-1" style="font-size: 14px;">
+                    <div class="flex-grow-1 p-1" style="font-size: 13px;">
                         <?php echo $product->name; ?>
                         <div style="font-size: 8px;">
                             <?php echo $product->description; ?>

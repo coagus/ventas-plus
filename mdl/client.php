@@ -24,17 +24,23 @@ class Client extends Table
         return $this->getRowsWhere(get_object_vars($this));
     }
 
-    public function getFilter($filter, $start = '0', $limit = '10')
+    public function getFilter($filter = '', $start = '0', $limit = '10')
     {
+        $filtered = $filter == '' ? '' : "WHERE name LIKE '%$filter%'";
+
         $qry = "SELECT * 
                 FROM clients 
-                WHERE name LIKE '%$filter%'";
+                $filtered";
+
         return $this->getQuery($qry, $start, $limit);
     }
 
     public function getCountFilter($filter)
     {
-        $qry = "FROM clients WHERE name LIKE '%$filter%'";
+        $filtered = $filter == '' ? '' : "WHERE name LIKE '%$filter%'";
+
+        $qry = "FROM clients $filtered";
+
         return $this->getCountQuery($qry);
     }
 }

@@ -9,6 +9,7 @@ class Movement extends Table
     public $apply = '';
     public $date_apply = '';
     public $quantity = '';
+    public $product_price = '';
     public $purchase_id = '';
     public $sale_id = '';
     public $return_id = '';

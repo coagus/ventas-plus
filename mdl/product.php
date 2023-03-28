@@ -34,8 +34,21 @@ class Product extends Table
 
     public function getCountFilter($filter)
     {
-        $qry = "FROM products WHERE name LIKE '%$filter%' OR description LIKE '%$filter%'";
+        $filtered = $filter == '' ? ''
+            : "WHERE name LIKE '%$filter%' OR description LIKE '%$filter%''";
+
+        $qry = "FROM products $filtered";
         return $this->getCountQuery($qry);
+    }
+
+    public function getProductsStock($filter = '', $start = '0', $limit = '10')
+    {
+        $filtered = $filter == '' ? ''
+            : "WHERE name LIKE '%$filter%' OR description LIKE '%$filter%''";
+
+        $qry = "SELECT * FROM v_stock $filtered";
+
+        return $this->getQuery($qry, $start, $limit);
     }
 }
 ?>

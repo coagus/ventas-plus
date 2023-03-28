@@ -1,6 +1,9 @@
 <?php
 require_once __DIR__ . '/../lib/mvc/controller.php';
 require_once __DIR__ . '/../mdl/user.php';
+require_once __DIR__ . '/../mdl/product.php';
+require_once __DIR__ . '/../mdl/sale.php';
+require_once __DIR__ . '/../lib/utl/badgeResult.php';
 
 class HomeController extends Controller
 {
@@ -69,6 +72,33 @@ class HomeController extends Controller
     public function getError()
     {
         return $this->error;
+    }
+
+    public function stock()
+    {
+        $this->view();
+    }
+
+    public function getStock()
+    {
+        $this->setLimit(9);
+        $product = new Product();
+        $filter = $this->isFiltered() ? $this->getFilter() : '';
+        $this->setPagination($product->getCountFilter($filter));
+        $products = $product->getProductsStock($filter, $this->getStart(), $this->getLimit());
+        return $products;
+    }
+
+    public function getAllOrders()
+    {
+        $sales = new Sale();
+        return $sales->getSales('0', '1000');
+    }
+
+    public function getBadge($count)
+    {
+        $badge = new BadgeResult();
+        return $badge->getColorCount($count, '0');
     }
 }
 ?>

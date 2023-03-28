@@ -47,6 +47,7 @@ CREATE TABLE `movements` (
   `apply` tinyint(1) NOT NULL DEFAULT '0',
   `date_apply` datetime DEFAULT NULL,
   `quantity` int NOT NULL,
+  `product_price` float NOT NULL,
   `purchase_id` int DEFAULT NULL,
   `sale_id` int DEFAULT NULL,
   `return_id` int DEFAULT NULL,

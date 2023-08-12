@@ -1,0 +1,58 @@
+<?php
+list($rows) = $this->componentParams;
+list($principal, $secondary, $complementary) = $this->getDataListDevice();
+?>
+
+<div class="btn-group-vertical my-2 w-100" role="group" aria-label="Vertical button group">
+    <?php foreach ($rows as $r) { ?>
+        <?php
+        $pri = '';
+        $sec = '';
+        $comp = '';
+        foreach ($r as $key => $value) {
+            if ($key == $principal)
+                $pri = $value;
+            if ($key == $secondary)
+                $sec = $value;
+            if ($key == $complementary)
+                $comp = $value;
+        } ?>
+
+        <button type="button" class="btn btn-outline-secondary text-start" id="editdvc<?php echo $r->id; ?>">
+            <div class="d-flex">
+                <div class="w-100">
+                    <?php echo $pri; ?>
+                    <div style="font-size: 12px;">
+                        <?php if ($sec != '') { ?>
+                            <span class="badge rounded-pill text-bg-dark">
+                                <?php echo $sec; ?>
+                            </span>
+                        <?php } ?>
+                        <?php echo $comp; ?>
+                    </div>
+                </div>
+                <div class="flex-shrink-1">
+                    <i class="bi bi-chevron-right" style='font-size:27px'></i>
+                </div>
+            </div>
+        </button>
+    <?php } ?>
+</div>
+
+<?php $this->component('pagination', ['dvc']); ?>
+
+<script>
+    $(document).ready(function () {
+        $.getScript("modules/navigate/main.js", function () {
+            $("#new").click(function () {
+                show("<?php echo $this->controller; ?>", "edit", "#main", "");
+            });
+            <?php foreach ($rows as $r) { ?>
+                $("#editdvc<?php echo $r->id; ?>").click(function () {
+                    show("<?php echo $this->controller; ?>", "edit", "#main",
+                        "id=<?php echo $r->id; ?>&ctlbk=user$actkb=index&ctlbkl2=home&actbkl2=admin");
+                });
+            <?php } ?>
+        });
+    });
+</script>

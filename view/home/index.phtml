@@ -1,0 +1,21 @@
+<div class="d-none d-sm-none d-md-none d-lg-block">
+    <?php $this->component('pc-header'); ?>
+</div>
+
+<div class="container-lg">
+    <div class="d-flex">
+        <div class="d-none d-sm-none d-md-none d-lg-block p-2 border-end m-2" style="width: 225px;">
+            <?php $this->component('pc-menu'); ?>
+        </div>
+        <div class="p-2 flex-grow-1" id="main">
+            <div class="d-block d-sm-block d-md-block d-lg-none">
+                <?php $this->component('dvc-header'); ?>
+            </div>
+            <h1>HOME</h1>
+        </div>
+    </div>
+</div>
+
+<div class="d-block d-sm-block d-md-block d-lg-none">
+    <?php $this->component('dvc-menu'); ?>
+</div>

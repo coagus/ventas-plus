@@ -1,0 +1,47 @@
+<?php $row = $this->getSingleRow(); ?>
+
+<form class="form-floating was-validated" id="form" action="javascript:void(0);" enctype="multipart/form-data">
+    <input name="id" type="hidden" value="<?php echo $row->id; ?>" />
+
+    <div class="row">
+        <?php
+        foreach ($row as $key => $value) {
+            if ($key != 'id') { ?>
+                <div class="col-sm-6">
+                    <div class="form-floating my-1">
+                        <input type="text" class="form-control" name="<?php echo $key; ?>" value="<?php echo $value; ?>">
+                        <label for="floatingInput">
+                            <?php echo $key; ?>
+                        </label>
+                    </div>
+                </div>
+            <?php }
+        } ?>
+    </div>
+
+    <div class="mt-2">
+        <button class="btn btn-primary" type="submit">
+            <i class="bi bi-save"></i>
+            Guardar
+        </button>
+        <?php if (!$nuevo) { ?>
+            <button class="btn btn-danger" id="delete">
+                <i class="bi bi-trash"></i>
+                Eliminar
+            </button>
+        <?php } ?>
+    </div>
+</form>
+
+<script>
+    $(document).ready(function () {
+        $.getScript("modules/navigate/main.js", function () {
+            $("#form").submit(function (event) {
+                show("<?php echo $this->controller; ?>", "save", "#main", $(this).serialize());
+            });
+            $("#delete").click(function () {
+                show("<?php echo $this->controller; ?>", "delete", "#main", "id=<?php echo $row->id; ?>");
+            });
+        });
+    });
+</script>

@@ -1,0 +1,12 @@
+<?php list($submenus) = $this->componentParams; ?>
+
+<?php foreach ($submenus as $s) {
+    $icon = $s["icon"] == '' ? 'cup-hot-fill' : $s["icon"];
+    ?>
+    <button type="button" class="btn btn-outline-primary m-1 p-0" style="width: 69px;" id="<?php echo $s["id"]; ?>">
+        <i class="bi bi-<?php echo $icon; ?> m-0" style='font-size:40px;'></i>
+        <div style="font-size:10px;">
+            <?php echo $s["title"]; ?>
+        </div>
+    </button>
+<?php } ?>

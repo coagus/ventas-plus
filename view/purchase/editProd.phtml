@@ -1,0 +1,29 @@
+Nombre del producto
+descripción
+
+<?php echo $_REQUEST['purchaseId']; ?>
+<br>
+<?php echo $_REQUEST['productId']; ?>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Presentación</th>
+            <th>Cantidad</th>
+            <th>Precio</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Unidades</td>
+            <td>
+                <input type="text" class="form-control" id="uni" placeholder="0">
+            </td>
+            <td>
+                <input type="text" class="form-control" id="pre" placeholder="0.00">
+            </td>
+            <td>Q50</td>
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,17 @@
+<?php list($title, $submenus) = $this->componentParams; ?>
+
+<strong>
+    <?php echo $title; ?>
+</strong>
+<ul>
+    <?php foreach ($submenus as $s) {
+        $icon = $s["icon"] == '' ? 'chevron-right' : $s["icon"];
+        ?>
+        <li class="d-grid">
+            <button class="btn btn-light btn-sm text-start" id="<?php echo $s["id"]; ?>">
+                <i class="bi bi-<?php echo $icon; ?>"></i>
+                <?php echo $s["title"]; ?>
+            </button>
+        </li>
+    <?php } ?>
+</ul>

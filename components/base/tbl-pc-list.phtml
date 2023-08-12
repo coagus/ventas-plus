@@ -1,0 +1,51 @@
+<?php list($rows) = $this->componentParams; ?>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <?php
+            foreach ($this->table as $key => $value) {
+                echo "<th>" . $key . "</th>";
+            }
+            ?>
+            <th class="text-end">
+                <button class="btn btn-sm btn-success" id="new">
+                    <i class="bi bi-plus-lg"></i>
+                    Nuevo
+                </button>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($rows as $r) { ?>
+            <tr>
+                <?php foreach ($r as $key => $value) {
+                    echo "<td>$value</td>";
+                } ?>
+                <td class="text-end">
+                    <button class="btn btn-sm btn-primary" id="edit<?php echo $r->id; ?>">
+                        <i class="bi bi-pencil"></i>
+                        Editar
+                    </button>
+                </td>
+            </tr>
+        <?php } ?>
+    </tbody>
+</table>
+
+<?php $this->component('pagination', ['pc']); ?>
+
+<script>
+    $(document).ready(function () {
+        $.getScript("modules/navigate/main.js", function () {
+            $("#new").click(function () {
+                show("<?php echo $this->controller; ?>", "edit", "#main", "");
+            });
+            <?php foreach ($rows as $r) { ?>
+                $("#edit<?php echo $r->id; ?>").click(function () {
+                    show("<?php echo $this->controller; ?>", "edit", "#main", "id=<?php echo $r->id; ?>");
+                });
+            <?php } ?>
+        });
+    });
+</script>

@@ -1,0 +1,39 @@
+<h1>Administración</h1>
+
+<div class="p-1 text-center bg-light rounded-4">
+    <?php
+    $this->component(
+        'dvc-admin-item',
+        [
+            [
+                ["id" => "dvc-users", "icon" => "people", "title" => "Usuarios"],
+                ["id" => "dvc-products", "icon" => "boxes", "title" => "Productos"],
+                ["id" => "dvc-clients", "icon" => "person-bounding-box", "title" => "Clientes"],
+                ["id" => "dvc-suppliers", "icon" => "building-fill-gear", "title" => "Proveedores"],
+            ]
+        ]
+    );
+    ?>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $.getScript("modules/navigate/main.js", function () {
+            $("#dvc-users").click(function () {
+                show("user", "index", "#main", "");
+            });
+
+            $("#dvc-products").click(function () {
+                show("product", "index", "#main", "");
+            });
+
+            $("#dvc-clients").click(function () {
+                show("client", "index", "#main", "");
+            });
+
+            $("#dvc-suppliers").click(function () {
+                show("supplier", "index", "#main", "");
+            });
+        });
+    });
+</script>

@@ -1,0 +1,42 @@
+<?php $prods = $this->getProductsAdded(); ?>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th colspan="2">Cantidad Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($prods as $p) { ?>
+            <tr>
+                <td>
+                    <?php echo $p->prod_name; ?>
+                </td>
+                <td>
+                    <?php echo $p->quantity; ?> unidades
+                </td>
+                <td class="text-end">
+                    <?php echo $p->quantity; ?>
+                </td>
+                <td class="text-end">
+                    <button class="btn btn-sm btn-primary" id="edit-<?php echo $p->product_id; ?>" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">Editar</button>
+                </td>
+            </tr>
+        <?php } ?>
+    </tbody>
+</table>
+
+<script>
+    $(document).ready(function () {
+        $.getScript("modules/navigate/main.js", function () {
+            <?php foreach ($prods as $p) { ?>
+                $("#edit-<?php echo $p->product_id; ?>").click(function (event) {
+                    show("purchase", "editProd", "#editProd", "purchaseId=<?php echo $_REQUEST['purchaseId']; ?>&productId=<?php echo $p->product_id; ?>");
+                });
+            <?php } ?>
+        });
+    });
+</script>

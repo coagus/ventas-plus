@@ -1,0 +1,32 @@
+<form id="form" action="javascript:void(0);" enctype="multipart/form-data">
+    <div class="input-group">
+        <span class="input-group-text">
+            <i class="bi bi-person-check-fill"></i>
+        </span>
+        <input type="text" class="form-control" name="username" placeholder="Ingresa tu usuario" />
+    </div>
+
+    <div class="input-group mt-2">
+        <span class="input-group-text">
+            <i class="bi bi-key-fill"></i>
+        </span>
+        <input type="password" class="form-control" name="password" placeholder="Ingresa tu contraseña" />
+    </div>
+
+    <div class="d-grid col-12 mx-auto mt-2">
+        <button type="submit" class="btn btn-success">
+            <strong>Ingresar</strong>
+            <i class="bi bi-box-arrow-in-right"></i>
+        </button>
+    </div>
+</form>
+
+<script>
+    $(document).ready(function () {
+        $.getScript("modules/navigate/main.js", function () {
+            $("#form").submit(function (event) {
+                show("home", "login", "body", $(this).serialize());
+            });
+        });
+    });
+</script>

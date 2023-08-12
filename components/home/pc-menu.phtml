@@ -1,0 +1,97 @@
+<?php
+$this->component(
+    'pc-menu-item',
+    [
+        'HOME',
+        [
+            ["id" => "pc-dashboard", "icon" => "speedometer", "title" => "Dashboard"],
+            ["id" => "pc-sells", "icon" => "", "title" => "Ventas"],
+            ["id" => "pc-purchase", "icon" => "", "title" => "Compras"],
+        ]
+    ]
+);
+
+$this->component(
+    'pc-menu-item',
+    [
+        'CATALOGOS',
+        [
+            ["id" => "pc-purchase-status", "icon" => "", "title" => "Estatus de Compra"],
+            ["id" => "pc-sale-status", "icon" => "", "title" => "Estatus de Venta"],
+            ["id" => "pc-movement-type", "icon" => "", "title" => "Tipos de movimiento"],
+            ["id" => "pc-modules", "icon" => "", "title" => "Modulos"],
+            ["id" => "pc-configurations", "icon" => "", "title" => "Configuraciones"],
+            ["id" => "pc-color", "icon" => "", "title" => "Colores"],
+        ]
+    ]
+);
+
+$this->component(
+    'pc-menu-item',
+    [
+        'MANTENIMIENTOS',
+        [
+            ["id" => "pc-roles", "icon" => "", "title" => "Roles"],
+            ["id" => "pc-users", "icon" => "", "title" => "Usuarios"],
+            ["id" => "pc-products", "icon" => "", "title" => "Productos"],
+            ["id" => "pc-packs", "icon" => "", "title" => "Paquetes"],
+            ["id" => "pc-clients", "icon" => "", "title" => "Clientes"],
+            ["id" => "pc-suppliers", "icon" => "", "title" => "Proveedores"],
+            ["id" => "pc-configuration", "icon" => "", "title" => "Configuracion"],
+        ]
+    ]
+);
+
+$this->component(
+    'pc-menu-item',
+    [
+        'REPORTES',
+        [
+            ["id" => "pc-inventory", "icon" => "", "title" => "Inventario"],
+            ["id" => "pc-sells", "icon" => "", "title" => "Ventas"],
+        ]
+    ]
+);
+?>
+
+<script>
+    $(document).ready(function () {
+        $.getScript("modules/navigate/main.js", function () {
+            $("#pc-purchase").click(function (event) {
+                show("purchase", "index", "#main", "");
+            });
+
+            $("#pc-purchase-status").click(function (event) {
+                show("purchase_status", "index", "#main", "");
+            });
+
+            $("#pc-sale-status").click(function (event) {
+                show("sale_status", "index", "#main", "");
+            });
+
+            $("#pc-movement-type").click(function (event) {
+                show("movement_type", "index", "#main", "");
+            });
+
+            $("#pc-roles").click(function (event) {
+                show("role", "index", "#main", "");
+            });
+
+            $("#pc-users").click(function (event) {
+                show("user", "index", "#main", "");
+            });
+
+            $("#pc-products").click(function (event) {
+                show("product", "index", "#main", "");
+            });
+
+            $("#pc-clients").click(function (event) {
+                show("client", "index", "#main", "");
+            });
+
+            $("#pc-suppliers").click(function (event) {
+                show("supplier", "index", "#main", "");
+            });
+        });
+    });
+</script>

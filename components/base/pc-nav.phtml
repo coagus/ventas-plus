@@ -1,0 +1,37 @@
+<?php list($navList) = $this->componentParams; ?>
+
+<nav aria-label="breadcrumb" class="mt-2">
+    <ol class="breadcrumb">
+        <?php foreach ($navList as $nav) { ?>
+            <?php if ($nav['type'] == 'active') { ?>
+                <li class="breadcrumb-item active" aria-current="page">
+                    <?php echo $nav['title']; ?>
+                </li>
+            <?php } else { ?>
+                <li class="breadcrumb-item">
+                    <button class="btn btn-sm btn-light my-0 py-0" id="<?php echo $nav['id']; ?>">
+                        <?php if ($nav['icon'] != '') { ?>
+                            <i class="bi bi-<?php echo $nav['icon']; ?>"></i>
+                        <?php } ?>
+                        <?php echo $nav['title']; ?>
+                    </button>
+                </li>
+            <?php } ?>
+        <?php } ?>
+    </ol>
+</nav>
+
+<script>
+    $(document).ready(function () {
+        $.getScript("modules/navigate/main.js", function () {
+            <?php
+            foreach ($navList as $nav) {
+                if ($nav['type'] != 'active') { ?>
+                    $("#<?php echo $nav['id']; ?>").click(function () {
+                        show("<?php echo $nav['ctl']; ?>", "<?php echo $nav['act']; ?>", "<?php echo $nav['vie']; ?>", "");
+                    });
+                <?php }
+            } ?>
+        });
+    });
+</script>

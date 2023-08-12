@@ -1,0 +1,26 @@
+<?php list($ctl, $act) = $this->componentParams; ?>
+
+<div class="d-flex bd-highlight bg-light border-bottom fixed-top opacity-75">
+  <div class="text-left">
+    <button class="btn btn-link" id="back">
+      <i class="bi bi-chevron-left" style='font-size:27px'></i>
+    </button>
+  </div>
+  <div class="flex-grow-1 text-center pt-3">
+    <h4>
+      <?php echo $this->ctlTitle; ?>
+    </h4>
+  </div>
+</div>
+
+<br><br>
+
+<script>
+  $(document).ready(function () {
+    $.getScript("modules/navigate/main.js", function () {
+      $("#back").click(function () {
+        show("<?php echo $ctl; ?>", "<?php echo $act; ?>", "#main", "");
+      });
+    });
+  });
+</script>

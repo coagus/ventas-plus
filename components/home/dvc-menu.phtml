@@ -1,0 +1,26 @@
+<br><br><br>
+
+<div class="d-flex bd-highlight fixed-bottom bg-light border-top">
+    <?php
+    $this->component('dvc-menu-item', ['Inicio', 'dvc-home', 'house']);
+    $this->component('dvc-menu-item', ['Admin', 'dvc-admin', 'gear']);
+    $this->component('dvc-menu-item', ['Reportes', 'reports', 'bar-chart-line']);
+    $this->component('dvc-menu-item', ['Salir', 'dvc-logout', 'box-arrow-right']);
+    ?>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $.getScript("modules/navigate/main.js", function () {
+            $("#dvc-home").click(function () {
+                show("home", "index", "body", "");
+            });
+            $("#dvc-admin").click(function () {
+                show("home", "admin", "#main", "");
+            });
+            $("#dvc-logout").click(function () {
+                show("home", "logout", "body", "");
+            });
+        });
+    });
+</script>

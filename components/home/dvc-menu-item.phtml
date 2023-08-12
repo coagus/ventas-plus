@@ -1,0 +1,9 @@
+<?php list($title, $id, $icon) = $this->componentParams; ?>
+<div class="flex-fill bd-highlight text-center">
+    <button class="btn btn-link m-0 p-0" id="<?php echo $id; ?>">
+        <i class="bi bi-<?php echo $icon; ?>" style='font-size:27px'></i>
+    </button>
+    <div style="font-size: 10px;">
+        <?php echo $title; ?>
+    </div>
+</div>

@@ -1,0 +1,75 @@
+<?php
+$purchases = $this->getPurchases();
+
+$this->component('pc-nav', [
+    [
+        [
+            "type" => "",
+            "icon" => "house",
+            "title" => "Inicio",
+            "id" => "pur-home",
+            "ctl" => "home",
+            "act" => "index",
+            "vie" => "body",
+        ],
+        [
+            "type" => "active",
+            "icon" => "",
+            "title" => "Compras",
+            "id" => "",
+            "ctl" => "",
+            "act" => "",
+            "vie" => "#main",
+        ],
+    ]
+]);
+?>
+<h2>Compras</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th># Compra</th>
+            <th>Fecha</th>
+            <th>Proveedor</th>
+            <th>Usuario</th>
+            <th class="text-end"><button class="btn btn-sm btn-success">Nuevo</button></th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($purchases as $p) { ?>
+            <tr <?php echo $p->status == 'EDITTING' ? 'class="table-warning"' : ''; ?>>
+                <td>
+                    <?php
+                    echo $p->id . ' ';
+                    echo $p->status == 'EDITTING' ? '<span class="badge text-bg-warning">Pendiente</span>' : '';
+                    ?>
+                </td>
+                <td>
+                    <?php echo $p->date; ?>
+                </td>
+                <td>
+                    <?php echo $p->supplier; ?>
+                </td>
+                <td>
+                    <?php echo $p->username; ?>
+                </td>
+                <td class="text-end">
+                    <button class="btn btn-sm btn-primary" id="pc-view-<?php echo $p->id; ?>">Ver</button>
+                </td>
+            </tr>
+        <?php } ?>
+    </tbody>
+</table>
+
+<script>
+    $(document).ready(function () {
+        $.getScript("modules/navigate/main.js", function () {
+            <?php foreach ($purchases as $p) { ?>
+                $("#pc-view-<?php echo $p->id; ?>").click(function (event) {
+                    show("purchase", "purchase", "#main", "purchaseId=<?php echo $p->id; ?>");
+                });
+            <?php } ?>
+        });
+    });
+</script>

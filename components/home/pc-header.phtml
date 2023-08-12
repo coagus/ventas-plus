@@ -1,0 +1,41 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom">
+    <div class="container">
+        <div class="navbar-brand">
+            <img src="/images/ceiba.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+            La Ceiba
+        </div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+            aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="header-home">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <button class="nav-link">
+                        <i class="bi bi-house"></i>
+                        Inicio
+                    </button>
+                </li>
+            </ul>
+            <span class="navbar-text">
+                <button class="btn btn-sm btn-outline-primary" id="pc-logout">
+                    Salir
+                    <i class="bi bi-box-arrow-right"></i>
+                </button>
+            </span>
+        </div>
+    </div>
+</nav>
+
+<script>
+    $(document).ready(function () {
+        $.getScript("modules/navigate/main.js", function () {
+            $("#header-home").click(function (event) {
+                show("home", "index", "body", $(this).serialize());
+            });
+            $("#pc-logout").click(function () {
+                show("home", "logout", "body", "");
+            });
+        });
+    });
+</script>

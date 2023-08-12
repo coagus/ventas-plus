@@ -1,0 +1,43 @@
+<nav aria-label="breadcrumb" class="mt-2">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <button class="btn btn-sm btn-light my-0 py-0" id="back-home">
+                <i class="bi bi-house"></i>
+                Inicio
+            </button>
+        </li>
+        <?php if ($this->action == 'edit') { ?>
+            <li class="breadcrumb-item">
+                <button class="btn btn-sm btn-light my-0 py-0" id="back-ctl">
+                    <?php echo $this->ctlTitle; ?>
+                </button>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                <?php echo $this->actTitle; ?>
+            </li>
+        <?php } else { ?>
+            <li class="breadcrumb-item active" aria-current="page">
+                <?php echo $this->ctlTitle; ?>
+            </li>
+        <?php } ?>
+    </ol>
+</nav>
+
+<h2>
+    <?php echo ($this->action == 'edit' ? $this->actTitle . ' ' : '') . $this->ctlTitle; ?>
+</h2>
+
+<script>
+    $(document).ready(function () {
+        $.getScript("modules/navigate/main.js", function () {
+            $("#back-home").click(function () {
+                show("home", "index", "body", "");
+            });
+            <?php if ($this->action == 'edit') { ?>
+                $("#back-ctl").click(function () {
+                    show("<?php echo $this->controller; ?>", "index", "#main", "");
+                });
+            <?php } ?>
+        });
+    });
+</script>

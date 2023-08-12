@@ -1,0 +1,11 @@
+<?php $rows = $this->getRows(); ?>
+
+<div class="d-block d-sm-block d-md-block d-lg-none">
+    <?php $this->component('dvc-header', ['home', 'admin']); ?>
+    <?php $this->component('tbl-dvc-list', [$rows]); ?>
+</div>
+
+<div class="d-none d-sm-none d-md-none d-lg-block">
+    <?php $this->component('tbl-pc-header'); ?>
+    <?php $this->component('tbl-pc-list', [$rows]); ?>
+</div>

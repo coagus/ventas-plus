@@ -1,0 +1,41 @@
+<?php $prods = $this->getProductsToAdd(); ?>
+
+<div class="card">
+    <div class="card-header">
+        Productos para agregar
+    </div>
+    <div class="card-body">
+        <div class="btn-group-vertical my-2 w-100" role="group" aria-label="Productos">
+            <?php foreach ($prods as $p) { ?>
+                <button type="button" class="btn btn-outline-secondary text-start" id="add-<?php echo $p->id; ?>"
+                    data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <div class="d-flex">
+                        <div class="w-100">
+                            <?php echo $p->name; ?>
+                            <div style="font-size: 12px;">
+                                <?php echo $p->description; ?>
+                            </div>
+                        </div>
+                        <div class="flex-shrink-1">
+                            <i class="bi bi-plus-lg" style='font-size:27px'></i>
+                        </div>
+                    </div>
+                </button>
+            <?php } ?>
+        </div>
+
+        <?php $this->component('pagination', ['p2a', 'purchase', $this->action, '#prodtoadd', [['purchaseId', $_REQUEST['purchaseId']]]]); ?>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $.getScript("modules/navigate/main.js", function () {
+            <?php foreach ($prods as $p) { ?>
+                $("#add-<?php echo $p->id; ?>").click(function (event) {
+                    show("purchase", "editProd", "#editProd", "purchaseId=<?php echo $_REQUEST['purchaseId']; ?>&productId=<?php echo $p->id; ?>");
+                });
+            <?php } ?>
+        });
+    });
+</script>
